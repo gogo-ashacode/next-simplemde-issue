@@ -1,8 +1,16 @@
-name: Setup Node.js environment
-  uses: actions/setup-node@v3.6.0
-name: Install Lighthouse CI
-  run: |
-    npm install -g @lhci/cli
-name: Run Lighthouse CI
-  run: |
-    lhci autorun --url=https://www.diarydirectory.com
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04 # See: https://github.com/aws/aws-cli/issues/5262
+    steps:
+      - id: install-lhci
+        name: Install Lighthouse CI
+        run: |
+          npm install -g @lhci/cli
+      - id: run-lhci
+        name: Run Lighthouse CI
+        run: |
+          lhci autorun --url=https://www.diarydirectory.com
