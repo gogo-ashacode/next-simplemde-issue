@@ -1,7 +1,8 @@
 module.exports = {
   ci: {
     collect: {
-      url: ["http://www.diarydirectory.com/"],
+      url: ['http://localhost:3000/'],
+      startServerCommand: 'yarn dev',
     },
     upload: {
       target: "temporary-public-storage",
