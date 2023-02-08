@@ -5,7 +5,7 @@ module.exports = {
       startServerCommand: 'yarn dev',
     },
     upload: {
-      target: "temporary-public-storage",
+      target: 'temporary-public-storage',
     },
   },
 };
