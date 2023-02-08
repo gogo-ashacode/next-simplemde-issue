@@ -1,16 +1,20 @@
-on:
-  push:
-    branches:
-      - master
+name: CI
+on: [push]
 jobs:
-  deploy:
-    runs-on: ubuntu-18.04 # See: https://github.com/aws/aws-cli/issues/5262
+  lhci:
+    name: Lighthouse
+    runs-on: ubuntu-latest
     steps:
-      - id: install-lhci
-        name: Install Lighthouse CI
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: npm install, build
         run: |
-          npm install -g @lhci/cli
-      - id: run-lhci
-        name: Run Lighthouse CI
+          npm install
+          npm run build
+      - name: run Lighthouse CI
         run: |
-          lhci autorun --url=https://www.diarydirectory.com
+          npm install -g @lhci/cli@0.8.x
+          lhci autorun
